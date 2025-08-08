@@ -1,0 +1,870 @@
+# Complete File Converter Website Prompt for Replit
+
+## Project Overview
+Create a fully functional, responsive file converter website that runs entirely in the browser using client-side JavaScript. The website should work perfectly on Replit's free plan with no backend requirements, no external APIs, and no server costs.
+
+## Technical Requirements
+- **Platform**: Replit (free plan compatible)
+- **Type**: Static HTML/CSS/JavaScript website
+- **Processing**: 100% client-side (browser-based)
+- **No server-side code required**
+- **No API keys or external services**
+- **Mobile responsive design**
+- **Dark/Light mode toggle**
+- **Works offline after first load**
+
+## Project Structure
+```
+file-converter-website/
+├── index.html
+├── styles.css
+├── script.js
+├── converters/
+│   ├── image-converter.js
+│   ├── pdf-tools.js
+│   └── text-converter.js
+└── libs/
+    ├── pdf-lib.min.js
+    └── pdfjs.min.js
+```
+
+## Complete HTML Code (index.html)
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConvertAll - Free Online File Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- PDF.js library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <!-- Image compression library -->
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🔄 ConvertAll</h1>
+            <button id="themeToggle" class="theme-toggle">🌙</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="hero-section">
+            <h2>Free Online File Converter</h2>
+            <p>Convert images, PDFs, and documents instantly in your browser. No uploads, 100% private.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchTools" placeholder="Search tools... (e.g., 'png to jpg', 'compress pdf')" />
+        </div>
+
+        <!-- Tool Categories -->
+        <div class="tools-grid">
+            <!-- Image Tools -->
+            <div class="tool-category" data-category="image">
+                <h3>🖼️ Image Tools</h3>
+                <div class="tool-cards">
+                    <div class="tool-card" data-tool="image-convert">
+                        <h4>Image Converter</h4>
+                        <p>PNG ↔ JPEG ↔ WebP ↔ BMP</p>
+                    </div>
+                    <div class="tool-card" data-tool="image-compress">
+                        <h4>Compress Image</h4>
+                        <p>Reduce image file size</p>
+                    </div>
+                    <div class="tool-card" data-tool="image-resize">
+                        <h4>Resize Image</h4>
+                        <p>Change dimensions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Tools -->
+            <div class="tool-category" data-category="pdf">
+                <h3>📄 PDF Tools</h3>
+                <div class="tool-cards">
+                    <div class="tool-card" data-tool="pdf-merge">
+                        <h4>Merge PDFs</h4>
+                        <p>Combine multiple PDFs</p>
+                    </div>
+                    <div class="tool-card" data-tool="pdf-split">
+                        <h4>Split PDF</h4>
+                        <p>Extract pages from PDF</p>
+                    </div>
+                    <div class="tool-card" data-tool="pdf-compress">
+                        <h4>Compress PDF</h4>
+                        <p>Reduce PDF file size</p>
+                    </div>
+                    <div class="tool-card" data-tool="pdf-to-image">
+                        <h4>PDF to Image</h4>
+                        <p>Convert PDF pages to images</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Tools -->
+            <div class="tool-category" data-category="text">
+                <h3>📝 Text Tools</h3>
+                <div class="tool-cards">
+                    <div class="tool-card" data-tool="text-case">
+                        <h4>Change Case</h4>
+                        <p>Upper, lower, title case</p>
+                    </div>
+                    <div class="tool-card" data-tool="json-format">
+                        <h4>JSON Formatter</h4>
+                        <p>Format & validate JSON</p>
+                    </div>
+                    <div class="tool-card" data-tool="base64">
+                        <h4>Base64 Encode/Decode</h4>
+                        <p>Convert to/from Base64</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Workspace (Hidden by default) -->
+        <div id="workspace" class="workspace hidden">
+            <button class="back-btn" id="backBtn">← Back to Tools</button>
+            
+            <div id="toolContent" class="tool-content">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 ConvertAll | 100% Free | No File Upload | Works Offline</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+## Complete CSS Code (styles.css)
+```css
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --card-bg: #f9fafb;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --text-color: #f9fafb;
+    --card-bg: #1f2937;
+    --border-color: #374151;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.search-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+#searchTools {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+#searchTools:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.tools-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.tool-category {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.tool-category h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.tool-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.tool-card {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-color);
+}
+
+.tool-card h4 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.tool-card p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.workspace {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.back-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+    box-shadow: var(--shadow);
+}
+
+.tool-content {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 8px;
+    min-height: 400px;
+}
+
+.drop-zone {
+    border: 3px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+}
+
+.drop-zone:hover {
+    border-color: var(--primary-color);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.drop-zone.dragover {
+    border-color: var(--secondary-color);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.file-input {
+    display: none;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.output-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.footer {
+    background: var(--card-bg);
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h2 {
+        font-size: 2rem;
+    }
+    
+    .tool-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Progress Bar */
+.progress-container {
+    background: var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    height: 30px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+```
+
+## Complete JavaScript Code (script.js)
+```javascript
+// Theme Management
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Initialize theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+body.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// Tool Selection
+const toolCards = document.querySelectorAll('.tool-card');
+const workspace = document.getElementById('workspace');
+const toolContent = document.getElementById('toolContent');
+const backBtn = document.getElementById('backBtn');
+const toolsGrid = document.querySelector('.tools-grid');
+const searchInput = document.getElementById('searchTools');
+
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const categories = document.querySelectorAll('.tool-category');
+    
+    categories.forEach(category => {
+        const cards = category.querySelectorAll('.tool-card');
+        let hasVisibleCard = false;
+        
+        cards.forEach(card => {
+            const title = card.querySelector('h4').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                card.style.display = 'block';
+                hasVisibleCard = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        category.style.display = hasVisibleCard ? 'block' : 'none';
+    });
+});
+
+// Tool click handlers
+toolCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const tool = card.getAttribute('data-tool');
+        openTool(tool);
+    });
+});
+
+backBtn.addEventListener('click', () => {
+    workspace.classList.add('hidden');
+    toolsGrid.style.display = 'grid';
+    document.querySelector('.hero-section').style.display = 'block';
+    document.querySelector('.search-container').style.display = 'block';
+});
+
+function openTool(toolName) {
+    toolsGrid.style.display = 'none';
+    document.querySelector('.hero-section').style.display = 'none';
+    document.querySelector('.search-container').style.display = 'none';
+    workspace.classList.remove('hidden');
+    
+    // Load tool interface based on selection
+    switch(toolName) {
+        case 'image-convert':
+            loadImageConverter();
+            break;
+        case 'image-compress':
+            loadImageCompressor();
+            break;
+        case 'image-resize':
+            loadImageResizer();
+            break;
+        case 'pdf-merge':
+            loadPDFMerger();
+            break;
+        case 'pdf-split':
+            loadPDFSplitter();
+            break;
+        case 'pdf-compress':
+            loadPDFCompressor();
+            break;
+        case 'pdf-to-image':
+            loadPDFToImage();
+            break;
+        case 'text-case':
+            loadTextCase();
+            break;
+        case 'json-format':
+            loadJSONFormatter();
+            break;
+        case 'base64':
+            loadBase64Tool();
+            break;
+        default:
+            toolContent.innerHTML = '<p>Tool under construction</p>';
+    }
+}
+
+// Image Converter Tool
+function loadImageConverter() {
+    toolContent.innerHTML = `
+        <h2>Image Format Converter</h2>
+        <div class="drop-zone" id="imageDropZone">
+            <p>📁 Drag & drop image here or click to browse</p>
+            <input type="file" id="imageInput" class="file-input" accept="image/*" multiple>
+        </div>
+        <div id="conversionOptions" style="display:none; margin-top: 2rem;">
+            <label>Convert to:</label>
+            <select id="outputFormat" class="btn" style="padding: 0.5rem;">
+                <option value="jpeg">JPEG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WebP</option>
+                <option value="bmp">BMP</option>
+            </select>
+            <div style="margin-top: 1rem;">
+                <label>Quality (JPEG/WebP): </label>
+                <input type="range" id="quality" min="10" max="100" value="90">
+                <span id="qualityValue">90</span>%
+            </div>
+            <button id="convertBtn" class="btn">Convert Image</button>
+        </div>
+        <div id="output" class="output-container" style="display:none;">
+            <h3>Converted Image:</h3>
+            <img id="preview" class="preview-image">
+            <button id="downloadBtn" class="btn">Download</button>
+        </div>
+    `;
+    
+    const dropZone = document.getElementById('imageDropZone');
+    const fileInput = document.getElementById('imageInput');
+    const qualitySlider = document.getElementById('quality');
+    const qualityValue = document.getElementById('qualityValue');
+    
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        handleImageFiles(e.dataTransfer.files);
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+        handleImageFiles(e.target.files);
+    });
+    
+    qualitySlider.addEventListener('input', (e) => {
+        qualityValue.textContent = e.target.value;
+    });
+    
+    document.getElementById('convertBtn').addEventListener('click', convertImage);
+}
+
+function handleImageFiles(files) {
+    if (files.length > 0) {
+        const file = files[0];
+        if (file.type.startsWith('image/')) {
+            document.getElementById('conversionOptions').style.display = 'block';
+            window.currentImageFile = file;
+        }
+    }
+}
+
+function convertImage() {
+    const format = document.getElementById('outputFormat').value;
+    const quality = document.getElementById('quality').value / 100;
+    const file = window.currentImageFile;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                document.getElementById('preview').src = url;
+                document.getElementById('output').style.display = 'block';
+                
+                document.getElementById('downloadBtn').onclick = function() {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `converted.${format}`;
+                    a.click();
+                };
+            }, `image/${format}`, quality);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Image Compressor Tool
+function loadImageCompressor() {
+    toolContent.innerHTML = `
+        <h2>Image Compressor</h2>
+        <div class="drop-zone" id="compressDropZone">
+            <p>📁 Drag & drop images here or click to browse</p>
+            <input type="file" id="compressInput" class="file-input" accept="image/*" multiple>
+        </div>
+        <div id="compressionSettings" style="display:none; margin-top: 2rem;">
+            <label>Compression Level: </label>
+            <input type="range" id="compressionLevel" min="0.1" max="1" step="0.1" value="0.7">
+            <span id="compressionValue">70</span>%
+            <button id="compressBtn" class="btn">Compress Images</button>
+        </div>
+        <div id="results" class="output-container" style="display:none;">
+            <h3>Compressed Images:</h3>
+            <div id="compressedList"></div>
+        </div>
+    `;
+    
+    const dropZone = document.getElementById('compressDropZone');
+    const fileInput = document.getElementById('compressInput');
+    const slider = document.getElementById('compressionLevel');
+    const sliderValue = document.getElementById('compressionValue');
+    
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        handleCompressFiles(e.dataTransfer.files);
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+        handleCompressFiles(e.target.files);
+    });
+    
+    slider.addEventListener('input', (e) => {
+        sliderValue.textContent = Math.round(e.target.value * 100);
+    });
+    
+    document.getElementById('compressBtn').addEventListener('click', compressImages);
+}
+
+function handleCompressFiles(files) {
+    if (files.length > 0) {
+        document.getElementById('compressionSettings').style.display = 'block';
+        window.imagesToCompress = files;
+    }
+}
+
+async function compressImages() {
+    const quality = parseFloat(document.getElementById('compressionLevel').value);
+    const files = window.imagesToCompress;
+    const results = document.getElementById('compressedList');
+    results.innerHTML = '';
+    
+    for (let file of files) {
+        try {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+                quality: quality
+            };
+            
+            const compressedFile = await imageCompression(file, options);
+            
+            const originalSize = (file.size / 1024).toFixed(2);
+            const compressedSize = (compressedFile.size / 1024).toFixed(2);
+            const reduction = ((1 - compressedFile.size / file.size) * 100).toFixed(1);
+            
+            const url = URL.createObjectURL(compressedFile);
+            
+            results.innerHTML += `
+                <div style="margin: 1rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+                    <p><strong>${file.name}</strong></p>
+                    <p>Original: ${originalSize} KB → Compressed: ${compressedSize} KB (${reduction}% reduction)</p>
+                    <a href="${url}" download="compressed_${file.name}" class="btn">Download</a>
+                </div>
+            `;
+        } catch (error) {
+            console.error('Compression failed:', error);
+        }
+    }
+    
+    document.getElementById('results').style.display = 'block';
+}
+
+// PDF Merger Tool
+function loadPDFMerger() {
+    toolContent.innerHTML = `
+        <h2>PDF Merger</h2>
+        <div class="drop-zone" id="pdfDropZone">
+            <p>📄 Drag & drop PDF files here or click to browse</p>
+            <input type="file" id="pdfInput" class="file-input" accept=".pdf" multiple>
+        </div>
+        <div id="pdfList" style="margin-top: 2rem;"></div>
+        <button id="mergePDFBtn" class="btn" style="display:none;">Merge PDFs</button>
+        <div id="mergeOutput" class="output-container" style="display:none;">
+            <h3>Merged PDF Ready!</h3>
+            <button id="downloadMergedPDF" class="btn">Download Merged PDF</button>
+        </div>
+    `;
+    
+    const dropZone = document.getElementById('pdfDropZone');
+    const fileInput = document.getElementById('pdfInput');
+    let pdfFiles = [];
+    
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        handlePDFFiles(e.dataTransfer.files);
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+        handlePDFFiles(e.target.files);
+    });
+    
+    async function handlePDFFiles(files) {
+        const pdfList = document.getElementById('pdfList');
+        
+        for (let file of files) {
+            if (file.type === 'application/pdf') {
+                pdfFiles.push(file);
+                pdfList.innerHTML += `
+                    <div style="padding: 0.5rem; background: var(--card-bg); margin: 0.5rem 0; border-radius: 4px;">
+                        📄 ${file.name}
+                    </div>
+                `;
+            }
+        }
+        
+        if (pdfFiles.length > 1) {
+            document.getElementById('mergePDFBtn').style.display = 'block';
+        }
+    }
+    
+    document.getElementById('mergePDFBtn').addEventListener('click', async () => {
+        const { PDFDocument } = PDFLib;
+        const mergedPdf = await PDFDocument.create();
+        
+        for (let file of pdfFiles) {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await PDFDocument.load(arrayBuffer);
+            const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+            pages.forEach((page) => mergedPdf.addPage(page));
+        }
+        
+        const pdfBytes = await mergedPdf.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        
+        document.getElementById('mergeOutput').style.display = 'block';
+        document.getElementById('downloadMergedPDF').onclick = () => {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'merged.pdf';
+            a.click();
+        };
+    });
+}
+
+// Text Case Converter
+function loadTextCase() {
+    toolContent.innerHTML = `
+        <h2>Text Case Converter</h2>
+        <textarea id="textInput" placeholder="Enter or paste your text here..." 
+                  style="width: 100%; height: 200px; padding: 1rem
