@@ -1,5 +1,5 @@
 import { useTheme } from "@/hooks/use-theme";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
@@ -12,7 +12,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white text-xl font-bold">🔄</span>
+              <RotateCcw className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-2xl font-bold gradient-text tracking-tight">
               ConvertAll
