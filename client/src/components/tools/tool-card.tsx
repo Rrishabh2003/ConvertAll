@@ -19,7 +19,7 @@ interface ToolCardProps {
 export default function ToolCard({ tool, onClick }: ToolCardProps) {
   const Icon = tool.icon;
   return (
-    <div 
+    <div
       onClick={onClick}
       className="group p-6 rounded-xl border border-border bg-card hover:bg-accent transition-all duration-200 cursor-pointer hover:shadow-lg hover:border-primary/20"
     >
