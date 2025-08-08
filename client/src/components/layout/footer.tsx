@@ -1,3 +1,5 @@
+import { Search, RefreshCw } from "lucide-react";
+
 export default function Footer() {
   return (
     <footer className="bg-muted/50 border-t border-border py-12 mt-20">
@@ -6,7 +8,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl font-bold">🔄</span>
+                <RefreshCw className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold gradient-text">
                 ConvertAll
@@ -22,7 +24,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Tools</h4>
             <ul className="space-y-2 text-muted-foreground">
@@ -32,7 +34,7 @@ export default function Footer() {
               <li><a href="#" className="hover:text-primary transition-colors">Compression Tools</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-muted-foreground">
@@ -43,7 +45,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-border pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-center md:text-left">
             © 2024 ConvertAll. All rights reserved. | 100% Free | No File Upload | Works Offline
