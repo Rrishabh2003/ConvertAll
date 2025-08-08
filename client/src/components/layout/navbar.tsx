@@ -14,9 +14,9 @@ export default function Navbar() {
             <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
               <RotateCcw className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold gradient-text tracking-tight">
+            <a href="/" className="text-2xl font-bold gradient-text tracking-tight hover:opacity-80 transition-opacity cursor-pointer">
               ConvertAll
-            </h1>
+            </a>
           </div>
           
           {/* Theme Toggle */}
