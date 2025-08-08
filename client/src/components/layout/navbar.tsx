@@ -17,7 +17,7 @@ export default function Navbar() {
           </div>
 
           {/* Theme Toggle */}
-          <ThemeToggleButton showLabel variant="circle" start="center" />
+          <ThemeToggleButton variant="circle" start="center" />
         </div>
       </div>
     </nav>
