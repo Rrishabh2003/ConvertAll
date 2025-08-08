@@ -1,66 +1,37 @@
 import { Badge } from "@/components/ui/badge";
-import { RotateCcw, Minimize2, Maximize2, Crop, Link, Scissors, Archive, Image, Type, Code, Lock, Globe } from "lucide-react";
+import { RotateCcw, Minimize2, Maximize2, Crop, Link, Scissors, Archive, Image, Type, Code, Lock, Globe, LucideIcon } from "lucide-react";
 
 interface Tool {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon: LucideIcon; // Changed from string to LucideIcon
   gradient: string;
   badge?: string;
   tags?: string[];
 }
 
 interface ToolCardProps {
-  tool: Tool;
+  title: string;
+  description: string;
+  icon: LucideIcon; // Changed from string to LucideIcon
   onClick: () => void;
 }
 
-export default function ToolCard({ tool, onClick }: ToolCardProps) {
-  const iconComponents: { [key: string]: React.ComponentType<any> } = {
-    RotateCcw,
-    Minimize2,
-    Maximize2,
-    Crop,
-    Link,
-    Scissors,
-    Archive,
-    Image,
-    Type,
-    Code,
-    Lock,
-    Globe,
-  };
-
-  const IconComponent = iconComponents[tool.icon] || RotateCcw;
-
+export default function ToolCard({ title, description, icon: Icon, onClick }: ToolCardProps) {
   return (
     <div 
-      className="tool-card-hover group cursor-pointer"
       onClick={onClick}
+      className="group p-6 rounded-xl border border-border bg-card hover:bg-accent transition-all duration-200 cursor-pointer hover:shadow-lg hover:border-primary/20"
     >
-      <div className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-border">
-        <div className={`w-12 h-12 bg-gradient-to-r ${tool.gradient} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}>
-          <IconComponent className="h-6 w-6 text-white" />
+      <div className="flex items-start space-x-4">
+        <div className="text-primary group-hover:scale-110 transition-transform duration-200">
+          <Icon className="h-8 w-8" />
         </div>
-        <h3 className="text-xl font-semibold mb-2 text-card-foreground">{tool.title}</h3>
-        <p className="text-muted-foreground mb-4 leading-relaxed">{tool.description}</p>
-        
-        {tool.badge && (
-          <div className="text-sm font-medium mb-2" style={{ color: `hsl(var(--primary))` }}>
-            {tool.badge}
-          </div>
-        )}
-        
-        {tool.tags && (
-          <div className="flex flex-wrap gap-2">
-            {tool.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="flex-1">
+          <h3 className="text-xl font-semibold mb-2 text-card-foreground">{title}</h3>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{description}</p>
+        </div>
       </div>
     </div>
   );

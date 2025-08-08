@@ -3,15 +3,38 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import ToolCard from "@/components/tools/tool-card";
 import Workspace from "@/components/tools/workspace";
-import { Search, Image, FileText, Type, Rocket, CheckCircle, Zap, Shield, Smartphone, RotateCcw, Minimize2, Maximize2, Crop, Link, Scissors, Archive, Code, Lock, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { 
+  Search, 
+  Image, 
+  FileText, 
+  Scissors, 
+  Merge, 
+  Compress, 
+  ImageIcon,
+  Type,
+  Code2,
+  Hash,
+  Link,
+  Rocket,
+  CheckCircle,
+  Zap,
+  Shield,
+  Smartphone,
+  RotateCcw,
+  Minimize2,
+  Maximize2,
+  Crop,
+  Archive
+} from "lucide-react";
 
 const imageTools = [
   {
     id: "image-convert",
     title: "Image Converter",
     description: "Convert between PNG, JPEG, WebP, and BMP formats",
-    icon: "RotateCcw",
+    icon: RotateCcw,
     gradient: "from-blue-500 to-cyan-500",
     tags: ["PNG", "JPEG", "WebP"]
   },
@@ -19,7 +42,7 @@ const imageTools = [
     id: "image-compress",
     title: "Compress Image",
     description: "Reduce image file size while maintaining quality",
-    icon: "Minimize2",
+    icon: Minimize2,
     gradient: "from-green-500 to-emerald-500",
     badge: "Up to 80% reduction"
   },
@@ -27,7 +50,7 @@ const imageTools = [
     id: "image-resize",
     title: "Resize Image",
     description: "Change image dimensions and aspect ratio",
-    icon: "Maximize2",
+    icon: Maximize2,
     gradient: "from-purple-500 to-pink-500",
     badge: "Maintain quality"
   },
@@ -35,7 +58,7 @@ const imageTools = [
     id: "image-crop",
     title: "Crop Image",
     description: "Crop and trim images to exact specifications",
-    icon: "Crop",
+    icon: Crop,
     gradient: "from-orange-500 to-red-500",
     badge: "Precise control"
   }
@@ -46,7 +69,7 @@ const pdfTools = [
     id: "pdf-merge",
     title: "Merge PDFs",
     description: "Combine multiple PDF files into one document",
-    icon: "Link",
+    icon: Link,
     gradient: "from-red-500 to-pink-500",
     badge: "Unlimited files"
   },
@@ -54,7 +77,7 @@ const pdfTools = [
     id: "pdf-split",
     title: "Split PDF",
     description: "Extract specific pages or split into multiple files",
-    icon: "Scissors",
+    icon: Scissors,
     gradient: "from-yellow-500 to-orange-500",
     badge: "Page by page"
   },
@@ -62,7 +85,7 @@ const pdfTools = [
     id: "pdf-compress",
     title: "Compress PDF",
     description: "Reduce PDF file size while preserving quality",
-    icon: "Archive",
+    icon: Archive,
     gradient: "from-green-500 to-teal-500",
     badge: "Smart compression"
   },
@@ -70,7 +93,7 @@ const pdfTools = [
     id: "pdf-to-image",
     title: "PDF to Image",
     description: "Convert PDF pages to PNG, JPEG images",
-    icon: "Image",
+    icon: Image,
     gradient: "from-indigo-500 to-purple-500",
     badge: "High resolution"
   }
@@ -81,7 +104,7 @@ const textTools = [
     id: "text-case",
     title: "Change Case",
     description: "Transform text case - upper, lower, title, sentence",
-    icon: "Type",
+    icon: Type,
     gradient: "from-teal-500 to-cyan-500",
     tags: ["UPPER", "lower"]
   },
@@ -89,7 +112,7 @@ const textTools = [
     id: "json-format",
     title: "JSON Formatter",
     description: "Format, validate, and beautify JSON data",
-    icon: "Code",
+    icon: Code2,
     gradient: "from-yellow-500 to-amber-500",
     badge: "Syntax validation"
   },
@@ -97,7 +120,7 @@ const textTools = [
     id: "base64",
     title: "Base64 Encode/Decode",
     description: "Convert text and files to/from Base64 format",
-    icon: "Lock",
+    icon: Hash,
     gradient: "from-purple-500 to-indigo-500",
     badge: "Bidirectional"
   },
@@ -105,7 +128,7 @@ const textTools = [
     id: "url-encode",
     title: "URL Encode/Decode",
     description: "Encode and decode URLs for web safety",
-    icon: "Globe",
+    icon: Link,
     gradient: "from-rose-500 to-pink-500",
     badge: "Web safe"
   }
@@ -142,7 +165,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50/80 via-purple-50/60 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/20 py-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -164,7 +187,7 @@ export default function Home() {
             <span className="text-primary font-semibold"> 100% private</span> - no file uploads, 
             <span className="text-secondary font-semibold"> completely offline</span> after first load.
           </p>
-          
+
           {/* Feature Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <span className="feature-badge-green">
@@ -213,7 +236,7 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-foreground">Image Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-800"></div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredTools(imageTools).map((tool) => (
                   <ToolCard
@@ -236,7 +259,7 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-foreground">PDF Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-red-200 to-transparent dark:from-red-800"></div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredTools(pdfTools).map((tool) => (
                   <ToolCard
@@ -259,7 +282,7 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-foreground">Text Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-teal-200 to-transparent dark:from-teal-800"></div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredTools(textTools).map((tool) => (
                   <ToolCard
@@ -294,35 +317,35 @@ export default function Home() {
               Experience the future of file conversion with complete privacy and instant processing.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🔒</span>
+                <Shield className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">100% Private</h3>
               <p className="text-muted-foreground">All processing happens in your browser. Your files never leave your device.</p>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">⚡</span>
+                <Zap className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
               <p className="text-muted-foreground">No upload delays. Convert files instantly with client-side processing.</p>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">📱</span>
+                <Smartphone className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Mobile Friendly</h3>
               <p className="text-muted-foreground">Works perfectly on all devices - desktop, tablet, and mobile.</p>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🆓</span>
+                <CheckCircle className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Completely Free</h3>
               <p className="text-muted-foreground">No subscriptions, no limits, no hidden costs. Free forever.</p>
