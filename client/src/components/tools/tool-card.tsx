@@ -12,13 +12,12 @@ interface Tool {
 }
 
 interface ToolCardProps {
-  title: string;
-  description: string;
-  icon: LucideIcon; // Changed from string to LucideIcon
+  tool: Tool;
   onClick: () => void;
 }
 
-export default function ToolCard({ title, description, icon: Icon, onClick }: ToolCardProps) {
+export default function ToolCard({ tool, onClick }: ToolCardProps) {
+  const Icon = tool.icon;
   return (
     <div 
       onClick={onClick}
@@ -29,8 +28,22 @@ export default function ToolCard({ title, description, icon: Icon, onClick }: To
           <Icon className="h-8 w-8" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-semibold mb-2 text-card-foreground">{title}</h3>
-          <p className="text-muted-foreground mb-4 leading-relaxed">{description}</p>
+          <h3 className="text-xl font-semibold mb-2 text-card-foreground">{tool.title}</h3>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{tool.description}</p>
+          {tool.badge && (
+            <Badge variant="secondary" className="mb-2">
+              {tool.badge}
+            </Badge>
+          )}
+          {tool.tags && (
+            <div className="flex flex-wrap gap-1">
+              {tool.tags.map((tag, index) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
