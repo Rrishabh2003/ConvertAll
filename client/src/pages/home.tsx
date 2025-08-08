@@ -159,7 +159,7 @@ export default function Home() {
               Free Online File Converter
             </span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Convert images, PDFs, and documents instantly in your browser. 
             <span className="text-primary font-semibold"> 100% private</span> - no file uploads, 
             <span className="text-secondary font-semibold"> completely offline</span> after first load.
@@ -210,7 +210,7 @@ export default function Home() {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                   <span className="text-white text-2xl">🖼️</span>
                 </div>
-                <h2 className="text-3xl font-bold">Image Tools</h2>
+                <h2 className="text-3xl font-bold text-foreground">Image Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-800"></div>
               </div>
               
@@ -233,7 +233,7 @@ export default function Home() {
                 <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
                   <span className="text-white text-2xl">📄</span>
                 </div>
-                <h2 className="text-3xl font-bold">PDF Tools</h2>
+                <h2 className="text-3xl font-bold text-foreground">PDF Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-red-200 to-transparent dark:from-red-800"></div>
               </div>
               
@@ -256,7 +256,7 @@ export default function Home() {
                 <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-green-500 rounded-xl flex items-center justify-center">
                   <span className="text-white text-2xl">📝</span>
                 </div>
-                <h2 className="text-3xl font-bold">Text Tools</h2>
+                <h2 className="text-3xl font-bold text-foreground">Text Tools</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-teal-200 to-transparent dark:from-teal-800"></div>
               </div>
               
@@ -278,7 +278,7 @@ export default function Home() {
               <div className="w-16 h-16 mx-auto mb-4 bg-muted rounded-2xl flex items-center justify-center">
                 <Search className="h-8 w-8 text-muted-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">No tools found</h3>
+              <h3 className="text-xl font-semibold mb-2 text-foreground">No tools found</h3>
               <p className="text-muted-foreground">
                 Try searching for different keywords like "image", "pdf", or "text"
               </p>

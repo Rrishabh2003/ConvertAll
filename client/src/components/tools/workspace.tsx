@@ -47,7 +47,7 @@ export default function Workspace({ toolId, onBack }: WorkspaceProps) {
       default:
         return (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold mb-2">Tool Under Construction</h3>
+            <h3 className="text-xl font-semibold mb-2 text-foreground">Tool Under Construction</h3>
             <p className="text-muted-foreground">This tool is being developed. Please check back soon!</p>
           </div>
         );
