@@ -21,7 +21,7 @@ export default function ToolCard({ tool, onClick }: ToolCardProps) {
   return (
     <div 
       onClick={onClick}
-      className="group p-6 rounded-xl border border-border bg-card hover:bg-accent transition-all duration-200 cursor-pointer hover:shadow-lg hover:border-primary/20"
+      className="group sleek-card p-6 cursor-pointer tool-card-hover"
     >
       <div className="flex items-start space-x-4">
         <div className="text-primary group-hover:scale-110 transition-transform duration-200">
