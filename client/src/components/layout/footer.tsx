@@ -51,7 +51,9 @@ export default function Footer() {
             © 2024 ConvertAll. All rights reserved. | 100% Free | No File Upload | Works Offline
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
-            <span className="text-sm text-muted-foreground">Built with ❤️ for privacy</span>
+            <span className="text-sm text-muted-foreground flex items-center">
+              Built with <RefreshCw className="h-4 w-4 mx-1 text-primary" /> for privacy
+            </span>
           </div>
         </div>
       </div>
