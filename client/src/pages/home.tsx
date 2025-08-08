@@ -144,7 +144,7 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50/80 via-purple-50/60 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/20 py-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="float-animation">
@@ -154,8 +154,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="gradient-text">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+            <span className="gradient-text leading-tight">
               Free Online File Converter
             </span>
           </h1>
@@ -166,17 +166,17 @@ export default function Home() {
           </p>
           
           {/* Feature Badges */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <span className="feature-badge-green">
               ✓ No Upload Required
             </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
+            <span className="feature-badge-blue">
               ⚡ Instant Processing
             </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200">
+            <span className="feature-badge-purple">
               🔒 100% Private
             </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200">
+            <span className="feature-badge-orange">
               📱 Mobile Friendly
             </span>
           </div>

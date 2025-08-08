@@ -14,7 +14,7 @@ export default function Navbar() {
             <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
               <span className="text-white text-xl font-bold">🔄</span>
             </div>
-            <h1 className="text-2xl font-bold gradient-text">
+            <h1 className="text-2xl font-bold gradient-text tracking-tight">
               ConvertAll
             </h1>
           </div>
