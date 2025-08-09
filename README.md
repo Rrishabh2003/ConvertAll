@@ -1,82 +1,113 @@
-# ConvertAll
+# freetools
 
-The most secure and fastest online file converter. Convert images, PDFs, and documents instantly in your browser with complete privacy.
-
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+A modern, client-side file converter built with React, TypeScript, and Express.js. Convert files instantly in your browser with complete privacy - no uploads required!
 
 ## Features
-- **Image Converter**: Convert images between formats (JPEG, PNG, WebP, etc.)
-- **PDF Tools**: Merge, split, compress, and convert PDFs
-- **Text Utilities**: Format JSON, encode Base64, change text case
-- **Compression Tools**: Compress images and PDFs
-- **Works Offline**: No file uploads, complete privacy
-- **Responsive UI**: Modern, mobile-friendly design
-- **Google AdSense Integration**: Monetization-ready
+
+- **100% Client-Side Processing**: All conversions happen in your browser
+- **Complete Privacy**: No file uploads, no tracking, no data collection
+- **Lightning Fast**: Instant processing with no server delays
+- **Mobile Friendly**: Works perfectly on all devices
+- **Free Forever**: No subscriptions, no limits, no hidden costs
+
+## Supported Formats
+
+### Image Tools
+- Convert between PNG, JPEG, WebP, BMP
+- Compress images (up to 80% reduction)
+- Resize and crop images
+- Maintain quality during conversion
+
+### PDF Tools
+- Merge multiple PDFs
+- Split PDFs by pages
+- Compress PDF files
+- Convert PDF to images
+
+### Text Tools
+- Change text case (upper, lower, title, sentence)
+- Format and validate JSON
+- Base64 encode/decode
+- URL encode/decode
 
 ## Tech Stack
-- **Frontend**: React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, Express
-- **Build Tools**: Vite
-- **Other Libraries**: PDF.js, PDF-lib, browser-image-compression
+
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Backend**: Express.js, Node.js
+- **Build Tool**: Vite
+- **Fonts**: Poppins (main), Orbitron (branding), Playfair Display (formal)
+- **Icons**: Lucide React
+- **Processing**: Client-side libraries (PDF.js, browser-image-compression)
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js v20+
-- npm v8+
+- Node.js (v18 or higher)
+- npm or yarn
 
 ### Installation
+
+1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/FileConvertPro.git
-cd FileConvertPro
+git clone <repository-url>
+cd freetools
+```
+
+2. Install dependencies
+```bash
 npm install
 ```
 
-### Development
+3. Start the development server
 ```bash
 npm run dev
 ```
 
-### Production
+4. Open your browser and navigate to `http://localhost:5050`
+
+### Building for Production
+
 ```bash
 npm run build
 npm start
 ```
 
-The server will run on [http://localhost:5050](http://localhost:5050) by default.
-
-## Usage
-- Access the web app in your browser.
-- Select the desired tool from the homepage.
-- Follow on-screen instructions to convert or process your files.
-
 ## Project Structure
+
 ```
-FileConvertPro/
-├── client/         # Frontend source code
-├── server/         # Backend server code
-├── shared/         # Shared types and schema
-├── public/         # Static assets (favicon, etc.)
-├── package.json    # Project metadata and scripts
-├── README.md       # Project documentation
+freetools/
+├── client/                 # Frontend React application
+│   ├── public/            # Static assets
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── lib/           # Utility libraries
+│   │   └── types/         # TypeScript types
+├── server/                # Backend Express server
+├── shared/                # Shared utilities
+└── dist/                  # Build output
 ```
+
+## Privacy & Security
+
+- **No File Uploads**: All processing happens locally in your browser
+- **No Data Collection**: We don't store, track, or analyze your files
+- **No Server Processing**: Files never leave your device
+- **Open Source**: Full transparency in how your data is handled
 
 ## Contributing
-Contributions are welcome! Please follow these steps:
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to your branch (`git push origin feature/your-feature`)
-5. Open a pull request
 
-Please ensure your code follows the existing style and passes all tests.
+We welcome contributions! Please see our contributing guidelines for more details.
 
 ## License
-This project is licensed under the MIT License.
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please open an issue on GitHub or contact us through our website.
+
+---
+
+**freetools** - Convert files instantly with complete privacy. Free forever.

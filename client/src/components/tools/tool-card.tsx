@@ -1,11 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { RotateCcw, Minimize2, Maximize2, Crop, Link, Scissors, Archive, Image, Type, Code, Lock, Globe, LucideIcon } from "lucide-react";
+import { ComponentType } from "react";
 
 interface Tool {
   id: string;
   title: string;
   description: string;
-  icon: LucideIcon; // Changed from string to LucideIcon
+  icon: LucideIcon | ComponentType<{ className?: string }>; // Accept both LucideIcon and custom components
   gradient: string;
   badge?: string;
   tags?: string[];

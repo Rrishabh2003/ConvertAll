@@ -11,7 +11,6 @@ import {
   FileText, 
   Scissors, 
   Merge, 
-  Compress, 
   ImageIcon,
   Type,
   Code2,
@@ -22,11 +21,11 @@ import {
   Zap,
   Shield,
   Smartphone,
-  RotateCcw,
   Minimize2,
   Maximize2,
   Crop,
-  Archive
+  Archive,
+  RefreshCw
 } from "lucide-react";
 
 const imageTools = [
@@ -34,7 +33,7 @@ const imageTools = [
     id: "image-convert",
     title: "Image Converter",
     description: "Convert between PNG, JPEG, WebP, and BMP formats",
-    icon: RotateCcw,
+    icon: RefreshCw,
     gradient: "from-blue-500 to-cyan-500",
     tags: ["PNG", "JPEG", "WebP"]
   },
@@ -172,14 +171,14 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="float-animation">
             <div className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center shadow-lg">
-                <Rocket className="h-8 w-8 text-white" />
+              <div className="w-100 h-100 flex items-center justify-center">
+                <img src="/icon1.png" alt="freetools icon" className="h-24 w-24 object-contain drop-shadow-lg" />
               </div>
             </div>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
             <span className="gradient-text leading-tight">
-              Free Online File Converter
+              Your Ultimate Free Toolkit
             </span>
           </h1>
           <p className="text-xl text-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -312,7 +311,7 @@ export default function Home() {
         {/* Features Section */}
         <section className="mt-20 py-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Why Choose ConvertAll?</h2>
+            <h2 className="text-3xl font-bold mb-4">Why Choose freetools?</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Experience the future of file conversion with complete privacy and instant processing.
             </p>

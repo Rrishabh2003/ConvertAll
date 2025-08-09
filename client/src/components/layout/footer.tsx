@@ -1,70 +1,56 @@
-import { Search, RefreshCw, Heart } from "lucide-react";
+import { Link, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-muted/50 border-t border-border py-12 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-muted border-t border-border mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
+          {/* Brand */}
+          <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
-                <RefreshCw className="h-6 w-6 text-white" />
+                <img src="/icon1.png" alt="freetools icon" className="h-8 w-8 object-contain" />
               </div>
               <h3 className="text-2xl font-bold gradient-text">
-                ConvertAll
+                freetools
               </h3>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
-              The most secure and fastest online file converter. Convert images, PDFs, and documents instantly in your browser with complete privacy.
+              Convert files instantly in your browser with complete privacy. No uploads, no tracking, no limits.
             </p>
-            <div className="flex space-x-4">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span>All systems operational</span>
-              </div>
+            <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+              <span>Made with</span>
+              <Heart className="h-4 w-4 text-red-500 fill-current" />
+              <span>for privacy and freedom</span>
             </div>
           </div>
 
+          {/* Tools */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Tools</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Image Converter</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">PDF Tools</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Text Utilities</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Compression Tools</a></li>
+            <h4 className="font-semibold text-foreground mb-4">Tools</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-foreground transition-colors">Image Converter</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">PDF Tools</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Text Tools</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Compress Files</a></li>
             </ul>
           </div>
 
+          {/* About */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Support</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact Us</a></li>
+            <h4 className="font-semibold text-foreground mb-4">About</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Support</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-border pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-center md:text-left">
-            © 2024 ConvertAll. All rights reserved. | 100% Free | No File Upload | Works Offline
-          </p>
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
-            <span className="text-sm text-muted-foreground flex items-center">
-              Built with <Heart className="h-4 w-4 mx-1 text-red-500" /> for privacy
-            </span>
-          </div>
+        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
+          © 2024 freetools. All rights reserved. | 100% Free | No File Upload | Works Offline
         </div>
-      </div>
-      {/* Google AdSense - unobtrusive, responsive ad */}
-      <div className="flex justify-center py-4">
-        <ins className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
-          data-ad-slot="1234567890"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
       </div>
     </footer>
   );

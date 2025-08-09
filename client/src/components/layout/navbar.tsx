@@ -1,4 +1,3 @@
-import { RotateCcw } from "lucide-react";
 import ThemeToggleButton from "@/components/ui/theme-toggle-button";
 
 export default function Navbar() {
@@ -8,11 +7,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
-              <RotateCcw className="h-6 w-6 text-white" />
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <img src="/icon1.png" alt="freetools icon" className="h-10 w-10 object-contain" />
             </div>
             <a href="/" className="text-2xl font-bold gradient-text tracking-tight hover:opacity-80 transition-opacity cursor-pointer">
-              ConvertAll
+              freetools
             </a>
           </div>
 
