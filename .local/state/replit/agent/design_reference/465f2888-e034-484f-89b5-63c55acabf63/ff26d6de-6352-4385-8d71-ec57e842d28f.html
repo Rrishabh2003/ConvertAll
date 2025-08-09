@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConvertAll - Free Online File Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/index.js"></script>
+    <script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#6366f1',
+                    secondary: '#8b5cf6',
+                    success: '#10b981',
+                    warning: '#f59e0b',
+                    error: '#ef4444'
+                },
+                animation: {
+                    'bounce-subtle': 'bounce 2s infinite',
+                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                }
+            }
+        }
+    };
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- @COMPONENT: Navigation -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">🔄</span>
+                    </div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        ConvertAll
+                    </h1>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+                    <span class="dark:hidden">🌙</span>
+                    <span class="hidden dark:inline">☀️</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: Main Container -->
+    <main class="min-h-screen">
+        <!-- @COMPONENT: Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20 py-20">
+            <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="float-animation">
+                    <div class="inline-flex items-center space-x-2 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center shadow-lg">
+                            <span class="text-white text-3xl">🚀</span>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    <span class="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+                        Free Online File Converter
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Convert images, PDFs, and documents instantly in your browser. 
+                    <span class="text-primary font-semibold">100% private</span> - no file uploads, 
+                    <span class="text-secondary font-semibold">completely offline</span> after first load.
+                </p>
+                
+                <!-- Feature Badges -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200">
+                        ✓ No Upload Required
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
+                        ⚡ Instant Processing
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200">
+                        🔒 100% Private
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200">
+                        📱 Mobile Friendly
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: Hero Section -->
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- @COMPONENT: Search Bar -->
+            <div class="mb-12">
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="searchTools" 
+                        class="block w-full pl-10 pr-4 py-4 text-lg border border-gray-300 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md"
+                        placeholder="Search tools... (e.g., 'png to jpg', 'compress pdf', 'merge documents')"
+                    />
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Search Bar -->
+
+            <!-- @COMPONENT: Tools Grid -->
+            <div class="space-y-12" id="toolsContainer">
+                <!-- @COMPONENT: Image Tools Category -->
+                <div class="tool-category" data-category="image">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                            <span class="text-white text-2xl">🖼️</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Image Tools</h2>
+                        <div class="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-800"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="tool-card group" data-tool="image-convert">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🔄</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Image Converter</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Convert between PNG, JPEG, WebP, and BMP formats</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">PNG</span>
+                                    <span class="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-1 rounded">JPEG</span>
+                                    <span class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-2 py-1 rounded">WebP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="image-compress">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">📉</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Compress Image</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Reduce image file size while maintaining quality</p>
+                                <div class="text-sm text-green-600 dark:text-green-400 font-medium">Up to 80% reduction</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="image-resize">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">📐</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Resize Image</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Change image dimensions and aspect ratio</p>
+                                <div class="text-sm text-purple-600 dark:text-purple-400 font-medium">Maintain quality</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="image-crop">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">✂️</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Crop Image</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Crop and trim images to exact specifications</p>
+                                <div class="text-sm text-orange-600 dark:text-orange-400 font-medium">Precise control</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: Image Tools Category -->
+
+                <!-- @COMPONENT: PDF Tools Category -->
+                <div class="tool-category" data-category="pdf">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                            <span class="text-white text-2xl">📄</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">PDF Tools</h2>
+                        <div class="flex-1 h-px bg-gradient-to-r from-red-200 to-transparent dark:from-red-800"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="tool-card group" data-tool="pdf-merge">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🔗</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Merge PDFs</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Combine multiple PDF files into one document</p>
+                                <div class="text-sm text-red-600 dark:text-red-400 font-medium">Unlimited files</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="pdf-split">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">✂️</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Split PDF</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Extract specific pages or split into multiple files</p>
+                                <div class="text-sm text-orange-600 dark:text-orange-400 font-medium">Page by page</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="pdf-compress">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🗜️</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Compress PDF</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Reduce PDF file size while preserving quality</p>
+                                <div class="text-sm text-green-600 dark:text-green-400 font-medium">Smart compression</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="pdf-to-image">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🖼️</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">PDF to Image</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Convert PDF pages to PNG, JPEG images</p>
+                                <div class="text-sm text-indigo-600 dark:text-indigo-400 font-medium">High resolution</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: PDF Tools Category -->
+
+                <!-- @COMPONENT: Text Tools Category -->
+                <div class="tool-category" data-category="text">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 bg-gradient-to-r from-teal-500 to-green-500 rounded-xl flex items-center justify-center">
+                            <span class="text-white text-2xl">📝</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Text Tools</h2>
+                        <div class="flex-1 h-px bg-gradient-to-r from-teal-200 to-transparent dark:from-teal-800"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="tool-card group" data-tool="text-case">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">Aa</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Change Case</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Transform text case - upper, lower, title, sentence</p>
+                                <div class="flex space-x-1">
+                                    <span class="text-xs bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 px-2 py-1 rounded">UPPER</span>
+                                    <span class="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">lower</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="json-format">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">{ }</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">JSON Formatter</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Format, validate, and beautify JSON data</p>
+                                <div class="text-sm text-yellow-600 dark:text-yellow-400 font-medium">Syntax validation</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="base64">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🔒</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Base64 Encode/Decode</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Convert text and files to/from Base64 format</p>
+                                <div class="text-sm text-purple-600 dark:text-purple-400 font-medium">Bidirectional</div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card group" data-tool="url-encode">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 cursor-pointer transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-r from-rose-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                                    <span class="text-white text-xl">🌐</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">URL Encode/Decode</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Encode and decode URLs for web safety</p>
+                                <div class="text-sm text-rose-600 dark:text-rose-400 font-medium">Web safe</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: Text Tools Category -->
+            </div>
+            <!-- @END_COMPONENT: Tools Grid -->
+
+            <!-- @COMPONENT: Tool Workspace (Hidden by default) -->
+            <div id="workspace" class="hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                        <button id="backBtn" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:shadow-lg transition-all duration-200 transform hover:-translate-x-1">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Back to Tools
+                        </button>
+                    </div>
+                    
+                    <div id="toolContent" class="p-8">
+                        <!-- @COMPONENT: Sample Drop Zone (Dynamic content will be inserted here) -->
+                        <div class="sample-drop-zone">
+                            <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl p-12 text-center bg-gray-50 dark:bg-gray-900 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 cursor-pointer">
+                                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center">
+                                    <span class="text-white text-2xl">📁</span>
+                                </div>
+                                <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Drop your files here</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-6">Or click to browse and select files from your device</p>
+                                
+                                <!-- Sample Controls -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                                    <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Output Format</label>
+                                        <select class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>JPEG</option>
+                                            <option>PNG</option>
+                                            <option>WebP</option>
+                                            <option>BMP</option>
+                                        </select>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quality</label>
+                                        <select class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>High (100%)</option>
+                                            <option>Medium (80%)</option>
+                                            <option>Low (60%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Resize</label>
+                                        <select class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Keep Original</option>
+                                            <option>1920x1080</option>
+                                            <option>1280x720</option>
+                                            <option>Custom</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <button class="mt-6 px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                                    Start Conversion
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- @COMPONENT: Sample Progress Indicator -->
+                        <div class="hidden sample-progress mt-8">
+                            <div class="bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-4 overflow-hidden">
+                                <div class="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-500 shimmer" style="width: 65%"></div>
+                            </div>
+                            <p class="text-center text-gray-600 dark:text-gray-400">Processing... 65% complete</p>
+                        </div>
+
+                        <!-- @COMPONENT: Sample File Preview -->
+                        <div class="hidden sample-preview mt-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                                    <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Original</h4>
+                                    <!-- Sample image from mountains in Colorado -->
+                                    <div class="bg-gray-200 dark:bg-gray-700 rounded-lg aspect-video flex items-center justify-center mb-4">
+                                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Mountain landscape with snow-capped peaks" class="rounded-lg w-full h-full object-cover" />
+                                    </div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                                        <p>Format: PNG | Size: 2.4 MB | 1920x1080</p>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                                    <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Converted</h4>
+                                    <!-- Same mountain image representing the converted version -->
+                                    <div class="bg-gray-200 dark:bg-gray-700 rounded-lg aspect-video flex items-center justify-center mb-4">
+                                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Same mountain landscape converted to JPEG" class="rounded-lg w-full h-full object-cover" />
+                                    </div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                        <p>Format: JPEG | Size: 890 KB | 1920x1080</p>
+                                        <p class="text-green-600 dark:text-green-400 font-medium">63% smaller!</p>
+                                    </div>
+                                    <button class="w-full px-4 py-2 bg-success text-white rounded-lg hover:bg-green-600 transition-colors duration-200 flex items-center justify-center space-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        <span>Download</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_COMPONENT: Sample File Preview -->
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Tool Workspace -->
+
+            <!-- @COMPONENT: Features Section -->
+            <section class="mt-20 py-12">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Why Choose ConvertAll?</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                        Experience the future of file conversion with complete privacy and instant processing.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🔒</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">100% Private</h3>
+                        <p class="text-gray-600 dark:text-gray-400">All processing happens in your browser. Your files never leave your device.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Lightning Fast</h3>
+                        <p class="text-gray-600 dark:text-gray-400">No upload delays. Convert files instantly with client-side processing.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">📱</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Mobile Friendly</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Works perfectly on all devices - desktop, tablet, and mobile.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🆓</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Completely Free</h3>
+                        <p class="text-gray-600 dark:text-gray-400">No subscriptions, no limits, no hidden costs. Free forever.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: Features Section -->
+        </div>
+    </main>
+    <!-- @END_COMPONENT: Main Container -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xl font-bold">🔄</span>
+                        </div>
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            ConvertAll
+                        </h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4 max-w-md">
+                        The most secure and fastest online file converter. Convert images, PDFs, and documents instantly in your browser with complete privacy.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            <span>All systems operational</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Tools</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Image Converter</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">PDF Tools</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Text Utilities</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Compression Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 dark:text-gray-400 text-center md:text-left">
+                    © 2024 ConvertAll. All rights reserved. | 100% Free | No File Upload | Works Offline
+                </p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Built with ❤️ for privacy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // TODO: Implement business logic, API calls, or state management
+        
+        (function() {
+            // Theme Management
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            
+            // Initialize theme from localStorage or default to light
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                html.classList.add('dark');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Tool Selection and Workspace Management
+            const toolCards = document.querySelectorAll('.tool-card');
+            const workspace = document.getElementById('workspace');
+            const toolContent = document.getElementById('toolContent');
+            const backBtn = document.getElementById('backBtn');
+            const toolsContainer = document.getElementById('toolsContainer');
+
+            toolCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const toolName = card.getAttribute('data-tool');
+                    showTool(toolName);
+                });
+            });
+
+            backBtn.addEventListener('click', () => {
+                workspace.classList.add('hidden');
+                toolsContainer.style.display = 'block';
+            });
+
+            function showTool(toolName) {
+                workspace.classList.remove('hidden');
+                toolsContainer.style.display = 'none';
+                
+                // Sample demonstrations for different tools
+                const sampleProgress = workspace.querySelector('.sample-progress');
+                const samplePreview = workspace.querySelector('.sample-preview');
+                
+                // Show sample progress for demonstration
+                setTimeout(() => {
+                    sampleProgress?.classList.remove('hidden');
+                }, 1000);
+                
+                // Show sample preview after "conversion"
+                setTimeout(() => {
+                    sampleProgress?.classList.add('hidden');
+                    samplePreview?.classList.remove('hidden');
+                }, 3000);
+                
+                workspace.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Search Functionality
+            const searchInput = document.getElementById('searchTools');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const toolCategories = document.querySelectorAll('.tool-category');
+                
+                toolCategories.forEach(category => {
+                    const tools = category.querySelectorAll('.tool-card');
+                    let hasVisibleTools = false;
+                    
+                    tools.forEach(tool => {
+                        const title = tool.querySelector('h3').textContent.toLowerCase();
+                        const description = tool.querySelector('p').textContent.toLowerCase();
+                        const isVisible = title.includes(searchTerm) || description.includes(searchTerm);
+                        
+                        tool.style.display = isVisible ? 'block' : 'none';
+                        if (isVisible) hasVisibleTools = true;
+                    });
+                    
+                    category.style.display = hasVisibleTools ? 'block' : 'none';
+                });
+            });
+
+            // Simulate file drop functionality for demonstration
+            const dropZones = document.querySelectorAll('.sample-drop-zone');
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                });
+                
+                zone.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                });
+                
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                    // TODO: Implement actual file processing logic
+                    console.log('Files dropped:', e.dataTransfer.files);
+                });
+            });
+
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
