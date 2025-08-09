@@ -177,13 +177,13 @@ export default function Home() {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
             <span className="gradient-text leading-tight">
-              Free Online File Converter
+              freetools - Your Ultimate Free Toolkit
             </span>
           </h1>
           <p className="text-xl text-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Convert images, PDFs, and documents instantly in your browser. 
-            <span className="text-primary font-semibold"> 100% private</span> - no file uploads, 
-            <span className="text-secondary font-semibold"> completely offline</span> after first load.
+            Access powerful free tools for converting images, PDFs, and documents right in your browser. 
+            <span className="text-primary font-semibold">100% private</span> - no uploads needed, 
+            <span className="text-secondary font-semibold">works offline</span> after first load.
           </p>
 
           {/* Feature Badges */}
@@ -215,7 +215,7 @@ export default function Home() {
             <Input
               type="text"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)} 
               className="pl-10 pr-4 py-4 text-lg rounded-2xl bg-card border-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md"
               placeholder="Search tools... (e.g., 'png to jpg', 'compress pdf', 'merge documents')"
             />
