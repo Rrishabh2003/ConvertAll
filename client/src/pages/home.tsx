@@ -172,9 +172,7 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="float-animation">
             <div className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center shadow-lg">
-                <Rocket className="h-8 w-8 text-white" />
-              </div>
+              <img src="/icon1.png" alt="Logo" className="w-40 h-50" />
             </div>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
