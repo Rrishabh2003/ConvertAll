@@ -1,4 +1,4 @@
-# freetools
+# freetools.pages
 
 A modern, client-side file converter built with React, TypeScript, and Express.js. Convert files instantly in your browser with complete privacy - no uploads required!
 
